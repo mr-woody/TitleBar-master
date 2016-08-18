@@ -4,4 +4,4 @@
 
 
 ### 效果图
-![TitleBar](https://github.com/18511084155/TitleBar-master/origin/master/art/Screenshot_com.titlebar.sample_2016-08-18-11-12-5.png)
+![TitleBar](https://github.com/18511084155/TitleBar-master/raw/master/art/Screenshot_com.titlebar.sample_2016-08-18-11-12-5.png)
