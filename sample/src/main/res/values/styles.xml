@@ -1,0 +1,23 @@
+<resources>
+
+    <!-- Base application theme. -->
+    <style name="AppTheme" parent="Theme.AppCompat.Light.NoActionBar">
+        <!-- Customize your theme here. -->
+    </style>
+
+    <style name="TitleBar">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">44dp</item>
+        <item name="android:background">@drawable/layer_titlebar_bg</item>
+        <item name="bl_leftAndRightTextColor">@color/selector_orange</item>
+        <item name="bl_leftAndRightTextSize">@dimen/textSize_16</item>
+        <item name="bl_titleTextColor">@color/black</item>
+        <item name="bl_titleTextSize">@dimen/textSize_10</item>
+        <item name="bl_leftAndRightPadding">@dimen/middle</item>
+
+
+        <!-- 下面这项只是测试用的，真实项目删掉 -->
+        <item name="android:layout_marginBottom">7dp</item>
+    </style>
+
+</resources>

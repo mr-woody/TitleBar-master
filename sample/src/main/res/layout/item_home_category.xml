@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    style="@style/MatchWrap.Vertical">
+
+    <LinearLayout
+        android:id="@+id/ll_item_home_header"
+        style="@style/MatchWrap"
+        android:gravity="center_vertical">
+
+        <View
+            android:layout_width="0dp"
+            android:layout_height="1px"
+            android:layout_weight="1"
+            android:background="@color/black" />
+
+        <TextView
+            android:id="@+id/tv_item_home_header"
+            style="@style/WrapWrap"
+            android:padding="0dp"
+            android:text="我的分组"
+            android:textColor="@color/black"
+            android:textSize="@dimen/textSize_10" />
+
+        <View
+            android:layout_width="0dp"
+            android:layout_height="1px"
+            android:layout_weight="3"
+            android:background="@color/black" />
+    </LinearLayout>
+
+    <cn.bingoogolapple.badgeview.BGABadgeTextView
+        android:id="@+id/tv_item_home_category"
+        style="@style/MatchWrap"
+        app:badge_bgColor="@color/orange_normal"
+        android:layout_marginBottom="2dp"
+        android:layout_marginTop="2dp"
+        android:background="@drawable/selector_popupwindow_item_graybg"
+        android:padding="@dimen/small"
+        android:text="首页"
+        android:textColor="@color/selector_popwindow_item_white_orange"
+        android:textSize="@dimen/textSize_16" />
+</LinearLayout>
