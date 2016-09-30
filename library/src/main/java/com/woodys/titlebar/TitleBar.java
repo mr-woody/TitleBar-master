@@ -8,6 +8,7 @@ import android.graphics.Color;
 import android.graphics.drawable.Drawable;
 import android.text.TextUtils;
 import android.util.AttributeSet;
+import android.util.TypedValue;
 import android.view.Gravity;
 import android.view.View;
 import android.view.ViewGroup;
@@ -66,24 +67,24 @@ public class TitleBar extends ViewGroup implements View.OnClickListener {
     private void initAttrs(Context context, AttributeSet attrs) {
         TypedArray typedArray = context.obtainStyledAttributes(attrs, R.styleable.TitleBar);
         setLeftText(typedArray.getText(R.styleable.TitleBar_bl_leftTitleText));
-        setLeftTextSize(typedArray.getDimension(R.styleable.TitleBar_bl_leftTitleTextSize, DEFAULT_ACTION_TEXT_SIZE));
+        setLeftTextSize(px2sp(context,typedArray.getDimensionPixelSize(R.styleable.TitleBar_bl_leftTitleTextSize, sp2px(context,DEFAULT_ACTION_TEXT_SIZE))));
         setLeftTextColor(typedArray.getColorStateList(R.styleable.TitleBar_bl_leftTitleTextColor));
         setLeftDrawable(typedArray.getDrawable(R.styleable.TitleBar_bl_leftTitleDrawable));
-        setLeftDrawablePadding(typedArray.getDimension(R.styleable.TitleBar_bl_leftTitleDrawablePadding, dip2px(5)));
+        setLeftDrawablePadding(typedArray.getDimensionPixelSize(R.styleable.TitleBar_bl_leftTitleDrawablePadding, dip2px(context,5)));
         setTitleText(typedArray.getText(R.styleable.TitleBar_bl_titleText));
-        setTitleSize(typedArray.getDimension(R.styleable.TitleBar_bl_titleTextSize, DEFAULT_MAIN_TEXT_SIZE));
+        setTitleSize(px2sp(context,typedArray.getDimensionPixelSize(R.styleable.TitleBar_bl_titleTextSize, sp2px(context,DEFAULT_MAIN_TEXT_SIZE))));
         setTitleColor(typedArray.getColorStateList(R.styleable.TitleBar_bl_titleTextColor));
         setTitleDrawable(typedArray.getDrawable(R.styleable.TitleBar_bl_titleDrawable));
-        setTitleDrawablePadding(typedArray.getDimension(R.styleable.TitleBar_bl_titleDrawablePadding, dip2px(5)));
+        setTitleDrawablePadding(typedArray.getDimensionPixelSize(R.styleable.TitleBar_bl_titleDrawablePadding, dip2px(context,5)));
         setSubTitleText(typedArray.getText(R.styleable.TitleBar_bl_subTitleText));
-        setSubTitleSize(typedArray.getDimension(R.styleable.TitleBar_bl_subTitleTextSize, DEFAULT_SUB_TEXT_SIZE));
+        setSubTitleSize(px2sp(context,typedArray.getDimensionPixelSize(R.styleable.TitleBar_bl_subTitleTextSize, sp2px(context,DEFAULT_SUB_TEXT_SIZE))));
         setSubTitleColor(typedArray.getColorStateList(R.styleable.TitleBar_bl_subTitleTextColor));
-        setActionTextSize(typedArray.getDimension(R.styleable.TitleBar_bl_leftAndRightTextSize, DEFAULT_ACTION_TEXT_SIZE));
+        setActionTextSize(px2sp(context,typedArray.getDimensionPixelSize(R.styleable.TitleBar_bl_leftAndRightTextSize, sp2px(context,DEFAULT_ACTION_TEXT_SIZE))));
         setActionTextColor(typedArray.getColor(R.styleable.TitleBar_bl_leftAndRightTextColor, Color.BLACK));
-        setOutPadding(typedArray.getDimension(R.styleable.TitleBar_bl_leftAndRightPadding, dip2px(8)));
-        setActionPadding(typedArray.getDimension(R.styleable.TitleBar_bl_ActionPadding, dip2px(5)));
+        setOutPadding(typedArray.getDimensionPixelSize(R.styleable.TitleBar_bl_leftAndRightPadding, dip2px(context,8)));
+        setActionPadding(typedArray.getDimensionPixelSize(R.styleable.TitleBar_bl_ActionPadding, dip2px(context,5)));
         setImmersive(typedArray.getBoolean(R.styleable.TitleBar_bl_isImmersive, false));
-        setHeight(typedArray.getInt(R.styleable.TitleBar_bl_titleBarHeight, dip2px(DEFAULT_TITLE_BAR_HEIGHT)));
+        setHeight(typedArray.getInt(R.styleable.TitleBar_bl_titleBarHeight, dip2px(context,DEFAULT_TITLE_BAR_HEIGHT)));
         setDivider(typedArray.getDrawable(R.styleable.TitleBar_bl_divider));
         setDividerColor(typedArray.getColor(R.styleable.TitleBar_bl_dividerColor, Color.GRAY));
         setDividerHeight(typedArray.getInt(R.styleable.TitleBar_bl_dividerHeight, 1));
@@ -500,9 +501,25 @@ public class TitleBar extends ViewGroup implements View.OnClickListener {
         mDividerView.layout(0, getMeasuredHeight() - mDividerView.getMeasuredHeight(), getMeasuredWidth(), getMeasuredHeight());
     }
 
-    public static int dip2px(int dpValue) {
-        final float scale = Resources.getSystem().getDisplayMetrics().density;
+    public static int dip2px(Context context,int dpValue) {
+        final float scale = context.getResources().getDisplayMetrics().density;
         return (int) (dpValue * scale + 0.5f);
+    }
+
+    public static float px2sp(Context context,float px) {
+        float scaledDensity = context.getResources().getDisplayMetrics().scaledDensity;
+        return px / scaledDensity;
+    }
+
+    /**
+     * 根据手机的分辨率从 px(像素) 的单位 转成为 dp
+     */
+    public static int sp2px(Context context, float pxValue) {
+        int value = -1;
+        if (null != context) {
+            value = (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_SP, pxValue, context.getResources().getDisplayMetrics());
+        }
+        return value;
     }
 
     /**
