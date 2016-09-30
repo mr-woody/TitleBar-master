@@ -42,10 +42,10 @@ public class TitleBar extends ViewGroup implements View.OnClickListener {
 
     private int mScreenWidth;
     private int mStatusBarHeight;
-    private int mActionPadding;
-    private int mOutPadding;
+    private float mActionPadding;
+    private float mOutPadding;
     private int mActionTextColor;
-    private int mActionTextSize;
+    private float mActionTextSize;
     private int mHeight;
 
 
@@ -66,22 +66,22 @@ public class TitleBar extends ViewGroup implements View.OnClickListener {
     private void initAttrs(Context context, AttributeSet attrs) {
         TypedArray typedArray = context.obtainStyledAttributes(attrs, R.styleable.TitleBar);
         setLeftText(typedArray.getText(R.styleable.TitleBar_bl_leftTitleText));
-        setLeftTextSize(typedArray.getDimensionPixelSize(R.styleable.TitleBar_bl_leftTitleTextSize, DEFAULT_ACTION_TEXT_SIZE));
+        setLeftTextSize(typedArray.getDimension(R.styleable.TitleBar_bl_leftTitleTextSize, DEFAULT_ACTION_TEXT_SIZE));
         setLeftTextColor(typedArray.getColorStateList(R.styleable.TitleBar_bl_leftTitleTextColor));
         setLeftDrawable(typedArray.getDrawable(R.styleable.TitleBar_bl_leftTitleDrawable));
-        setLeftDrawablePadding(typedArray.getDimensionPixelSize(R.styleable.TitleBar_bl_leftTitleDrawablePadding, dip2px(5)));
+        setLeftDrawablePadding(typedArray.getDimension(R.styleable.TitleBar_bl_leftTitleDrawablePadding, dip2px(5)));
         setTitleText(typedArray.getText(R.styleable.TitleBar_bl_titleText));
-        setTitleSize(typedArray.getDimensionPixelSize(R.styleable.TitleBar_bl_titleTextSize, DEFAULT_MAIN_TEXT_SIZE));
+        setTitleSize(typedArray.getDimension(R.styleable.TitleBar_bl_titleTextSize, DEFAULT_MAIN_TEXT_SIZE));
         setTitleColor(typedArray.getColorStateList(R.styleable.TitleBar_bl_titleTextColor));
         setTitleDrawable(typedArray.getDrawable(R.styleable.TitleBar_bl_titleDrawable));
-        setTitleDrawablePadding(typedArray.getDimensionPixelSize(R.styleable.TitleBar_bl_titleDrawablePadding, dip2px(5)));
+        setTitleDrawablePadding(typedArray.getDimension(R.styleable.TitleBar_bl_titleDrawablePadding, dip2px(5)));
         setSubTitleText(typedArray.getText(R.styleable.TitleBar_bl_subTitleText));
-        setSubTitleSize(typedArray.getDimensionPixelSize(R.styleable.TitleBar_bl_subTitleTextSize, DEFAULT_SUB_TEXT_SIZE));
+        setSubTitleSize(typedArray.getDimension(R.styleable.TitleBar_bl_subTitleTextSize, DEFAULT_SUB_TEXT_SIZE));
         setSubTitleColor(typedArray.getColorStateList(R.styleable.TitleBar_bl_subTitleTextColor));
-        setActionTextSize(typedArray.getDimensionPixelSize(R.styleable.TitleBar_bl_leftAndRightTextSize, DEFAULT_ACTION_TEXT_SIZE));
+        setActionTextSize(typedArray.getDimension(R.styleable.TitleBar_bl_leftAndRightTextSize, DEFAULT_ACTION_TEXT_SIZE));
         setActionTextColor(typedArray.getColor(R.styleable.TitleBar_bl_leftAndRightTextColor, Color.BLACK));
-        setOutPadding(typedArray.getDimensionPixelSize(R.styleable.TitleBar_bl_leftAndRightPadding, dip2px(8)));
-        setActionPadding(typedArray.getDimensionPixelSize(R.styleable.TitleBar_bl_ActionPadding, dip2px(5)));
+        setOutPadding(typedArray.getDimension(R.styleable.TitleBar_bl_leftAndRightPadding, dip2px(8)));
+        setActionPadding(typedArray.getDimension(R.styleable.TitleBar_bl_ActionPadding, dip2px(5)));
         setImmersive(typedArray.getBoolean(R.styleable.TitleBar_bl_isImmersive, false));
         setHeight(typedArray.getInt(R.styleable.TitleBar_bl_titleBarHeight, dip2px(DEFAULT_TITLE_BAR_HEIGHT)));
         setDivider(typedArray.getDrawable(R.styleable.TitleBar_bl_divider));
@@ -141,15 +141,15 @@ public class TitleBar extends ViewGroup implements View.OnClickListener {
         setMeasuredDimension(getMeasuredWidth(), mHeight);
     }
 
-    public void setOutPadding(int padding) {
+    public void setOutPadding(float padding) {
         mOutPadding = padding;
-        mRightLayout.setPadding(mOutPadding, 0, mOutPadding, 0);
-        mLeftText.setPadding(mOutPadding, 0, mOutPadding, 0);
+        mRightLayout.setPadding((int)(mOutPadding+0.5), 0, (int)(mOutPadding+0.5), 0);
+        mLeftText.setPadding((int)(mOutPadding+0.5), 0, (int)(mOutPadding+0.5), 0);
     }
 
-    private void setActionPadding(int padding) {
+    private void setActionPadding(float padding) {
         mActionPadding = padding;
-        mRightLayout.setPadding(mOutPadding + mActionPadding, 0, mOutPadding, 0);
+        mRightLayout.setPadding((int)(mOutPadding + mActionPadding+0.5), 0, (int)(mOutPadding+0.5), 0);
     }
 
     public void setLeftImageResource(int resId) {
@@ -165,8 +165,8 @@ public class TitleBar extends ViewGroup implements View.OnClickListener {
         }
     }
 
-    public void setLeftDrawablePadding(int padding) {
-        mLeftText.setCompoundDrawablePadding(padding);
+    public void setLeftDrawablePadding(float padding) {
+        mLeftText.setCompoundDrawablePadding((int)(padding+0.5));
     }
 
     public void setLeftClickListener(OnClickListener l) {
@@ -235,8 +235,8 @@ public class TitleBar extends ViewGroup implements View.OnClickListener {
         }
     }
 
-    public void setTitleDrawablePadding(int padding) {
-        mCenterText.setCompoundDrawablePadding(padding);
+    public void setTitleDrawablePadding(float padding) {
+        mCenterText.setCompoundDrawablePadding((int) padding);
     }
 
     public void setCenterClickListener(OnClickListener l) {
@@ -324,7 +324,7 @@ public class TitleBar extends ViewGroup implements View.OnClickListener {
         mActionTextColor = colorResId;
     }
 
-    public void setActionTextSize(int size) {
+    public void setActionTextSize(float size) {
         mActionTextSize = size;
     }
 
@@ -448,7 +448,7 @@ public class TitleBar extends ViewGroup implements View.OnClickListener {
             view = text;
         }
 
-        view.setPadding(mActionPadding, 0, mActionPadding, 0);
+        view.setPadding((int)(mActionPadding+0.5), 0, (int)(mActionPadding+0.5), 0);
         view.setTag(action);
         view.setOnClickListener(this);
         return view;
