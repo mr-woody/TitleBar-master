@@ -149,7 +149,7 @@ public class TitleBar extends ViewGroup implements View.OnClickListener {
 
     private void setActionPadding(int padding) {
         mActionPadding = padding;
-        mLeftText.setPadding(mOutPadding + mActionPadding, 0, mOutPadding, 0);
+        mRightLayout.setPadding(mOutPadding + mActionPadding, 0, mOutPadding, 0);
     }
 
     public void setLeftImageResource(int resId) {
